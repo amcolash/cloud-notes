@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap');
+
+body {
+  /* background-color: hsl(120, 80%, 80%); */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  color: #333;
+  font-family: 'Patrick Hand', sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.75rem;
+}
+
+.notepad {
+  background-color: #eee;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.25), 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1), 0.1rem -0.1rem 1rem rgba(0, 0, 0, 0.1),
+    -0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1), -0.1rem -0.1rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  animation: 1s cubic-bezier(0.11, 0.81, 0.76, 1.18) 1s both appear;
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.notepad textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  width: 70vh;
+  max-height: 80vh;
+  max-width: 70vw;
+  color: #333;
+  font-family: 'Patrick Hand', sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.75rem;
+  background: repeating-linear-gradient(0, transparent 0 calc(1.75rem - 1px), #cebba3 1px 1.75rem);
+  background-position-y: 1.35rem;
+  background-attachment: local;
+}
+
+@keyframes cloudAppear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(0.75);
+    opacity: 1;
+  }
+}
+
+.cloud {
+  width: 500px;
+  height: 300px;
+  animation: 1s cubic-bezier(0.11, 0.81, 0.76, 1.18) 4s both cloudAppear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.cloud .text {
+  z-index: 1;
+  font-size: 2.2rem;
+  color: #999;
+  text-shadow: 0.1rem 0.1rem 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+.cloud-circle {
+  backface-visibility: hidden;
+  width: 500px;
+  height: 275px;
+  border-radius: 50%;
+  filter: url(#filter) brightness(1.5) contrast(2);
+  box-shadow: 400px 400px 60px 0px hsl(241, 0%, 80%), 400px 400px 100px 0px rgba(0, 0, 0, 0.3),
+    400px 400px 100px 0px rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: -320px;
+  left: -320px;
+  transform: translate(-16%, -23%);
+}

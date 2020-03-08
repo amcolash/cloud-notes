@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notepad</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="notepad">
+      <textarea rows="1" placeholder="Your life story isn't going to write itself..."></textarea>
+    </div>
+
+    <!-- Technique from https://css-tricks.com/drawing-realistic-clouds-with-svg-and-css/ -->
+    <!-- Animation from https://stackoverflow.com/questions/42557401/svg-shape-distortion-with-feturbulences -->
+    <div class="cloud">
+      <div class="cloud-circle"></div>
+      <svg width="0" height="0">
+        <filter id="filter">
+          <feTurbulence id="noise" type="fractalNoise" baseFrequency=".01" numOctaves="8" />
+
+          <feColorMatrix type="hueRotate" values="0">
+            <animate attributeName="values" from="0" to="360" dur="30s" repeatCount="indefinite" />
+          </feColorMatrix>
+          <feDisplacementMap in="SourceGraphic" xChannelSelector="R" yChannelSelector="B" scale="80">
+            <animate attributeName="scale" values="80;90;80" dur="30s" repeatCount="indefinite" />
+          </feDisplacementMap>
+          <feComponentTransfer result="main">
+            <feFuncA type="gamma" amplitude="50" exponent="2" />
+          </feComponentTransfer>
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0"
+          />
+          <feComposite operator="over" in="main" />
+          <feGaussianBlur stdDeviation="5" />
+        </filter>
+      </svg>
+      <div class="text">Think about some stuff...</div>
+    </div>
+
+    <script>
+      // Don't need to wait for this part, can immediately interact with the filter
+      const noise = document.querySelector('#noise');
+      // noise.seed.baseVal = Math.random() * 100;
+
+      window.onload = () => {
+        const textarea = document.querySelector('textarea');
+
+        function resizeText() {
+          textarea.style.height = 0;
+          textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        resizeText();
+
+        textarea.oninput = resizeText;
+        window.onresize = resizeText;
+      };
+    </script>
+  </body>
+</html>
